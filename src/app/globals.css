@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+/* menu bar */
+.p-menubar {
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+}
 
+.p-menubar .p-menuitem-link {
+  padding: 0.6rem 0.75rem; /* reduce padding */
+  font-size: 1.2 rem;       /* smaller font */
+}
 
 

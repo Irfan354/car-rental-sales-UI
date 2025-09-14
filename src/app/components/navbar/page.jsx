@@ -8,30 +8,61 @@ export default function Navbar() {
   const router = useRouter();
 
   const items = [
+    // home
     {
       label: "Home",
       icon: "pi pi-home",
       command: () => router.push("/"),
     },
-    // admin -> users, hosters, customers
+    // admin -> users,....
     {
       label: "Admin",
-      icon: "pi pi-users",
+      icon: "pi pi-user-edit",
       items: [
         {
           label: "Users",
-          icon: "pi pi-user",
+          icon: "pi pi-users",
           command: () => router.push("/admin/users"),
         },
         {
-          label : "Hosters",
-          icon : "pi pi-briefcase",
-          command: () => router.push("/admin/hosters"),
+          label : "Brands",
+          icon : "pi pi-car",
+          command: () => router.push("/admin/brands"),
         },
         {
-          label : "Customers",
-          icon : " pi pi-plus",
-          command : () => router.push("/admin/customers"),
+          label : "Models",
+          icon : " pi pi-car",
+          command : () => router.push("/admin/models"),
+        },
+        {
+          label : "Variants",
+          icon : "pi pi-car",
+          command: () => router.push("/admin/variants"),
+        },
+        {
+          label : "States",
+          icon : " pi pi-map",
+          command : () => router.push("/admin/states"),
+        },
+        {
+          label : "Cities",
+          icon : "pi pi-map",
+          command: () => router.push("/admin/cities"),
+        },
+        {
+          label : "Checklist Categories",
+          icon : " pi pi-list",
+          command : () => router.push("/admin/checklist-categories"),
+        },
+        {
+          label : "Checklist Options",
+          icon : "pi pi-list",
+          command: () => router.push("/admin/checklist-options"),
+        },
+        {
+          label : "Settings",
+          icon : " pi pi-cog",
+          command : () => router.push("/admin/settings"),
         },
       ],
     },
@@ -46,23 +77,8 @@ export default function Navbar() {
           command : () => router.push("/vehicle/all-vehicles")
         },
         {
-          label: "Brand",
-          icon: "pi pi-apple",
-          command: () => router.push("/vehicle/brand"),
-        },
-        {
-          label: "Model",
-          icon: "pi pi-table",
-          command: () => router.push("/vehicle/model"),
-        },
-        {
-          label: "Variant",
-          icon: "pi pi-th-large",
-          command: () => router.push("/vehicle/variant"),
-        },
-        {
           label: "Vehicle Type",
-          icon: "pi pi-tag",
+          icon: "pi pi-car",
           command: () => router.push("/vehicle/vehicle-type"),
         },
         {
@@ -77,7 +93,7 @@ export default function Navbar() {
         },
         {
           label: "Transmission",
-          icon: "pi pi-cog",
+          icon: "pi pi-sliders-h",
           command: () => router.push("/vehicle/transmission"),
         },
         {
@@ -87,7 +103,7 @@ export default function Navbar() {
         },
         {
           label : "Gears",
-          icon : "pi pi-sliders-h",
+          icon : "pi pi-cog",
           command : () => router.push("/vehcile/gears"),
         },
         {
@@ -97,7 +113,7 @@ export default function Navbar() {
         },
         {
           label : " Vehicle Features",
-          icon : "pi pi-list",
+          icon : "pi pi-star",
           command : () => router.push("/vehicle/vehiclefeatures"),
         },
         {
@@ -107,25 +123,20 @@ export default function Navbar() {
         },
       ],
     },
-    // Inspection
+    // Inventory
     {
-      label: "Inspection",
-      icon: "pi pi-search",
+      label: "Inventory",
+      icon: "pi pi-warehouse",
       items: [
         {
-          label: "Checklist Options",
-          icon: "pi pi-check",
-          command: () => router.push("/inspection/checklistoptions"),
+          label: "Available Vehicles",
+          icon: "pi pi-check-circle",
+          command: () => router.push("/inventory/available-vehicles"),
         },
         {
-          label: "Checklist Category",
-          icon: "pi pi-list",
-          command: () => router.push("/inspection/checklistcategory"),
-        },
-        {
-          label: "Vehicle Inspection",
-          icon: "pi pi-car",
-          command: () => router.push("/inspection/vehicle"),
+          label: "Pending Vehicles",
+          icon: "pi pi-times-circle",
+          command: () => router.push("/inventory/pending-vehicles"),
         },
       ],
     },
@@ -146,39 +157,48 @@ export default function Navbar() {
         },
       ],
     },
-    // Pricing
+
+    // hosters
     {
-      label: "Pricing",
+      label: "Hosters",
+      icon: "pi pi-user-plus",
+      command: () => router.push("/users"),
+    },
+
+    // Customers
+    {
+      label: "Customers",
+      icon: "pi pi-users",
+      command: () => router.push("/customers"),
+    },
+    // Billing
+    {
+      label: "Billing",
       icon: "pi pi-dollar",
       items : [
         {
-          label : " Vehicle Bookings Prices",
-          icon : "pi pi-dollar",
-          command : () => router.push("/pricing/prices"),
+          label : "Invoices",
+          icon : "pi pi-file",
+          command : () => router.push("/billing/invoices"),
         },
         {
-          label : " Vehicle Booking Logs",
-          icon : "pi pi-list",
-          command : () => router.push("/pricing/logs")
+          label : "Payment History",
+          icon : "pi pi-calendar",
+          command : () => router.push("/billing/payment-history")
         }
       ]
     },
+    // Reports
     {
       label: "Reports",
       icon: "pi pi-chart-line",
       command: () => router.push("/reports"),
     },
-
+    // support
     {
       label: "Support",
-      icon: "pi pi-question-circle",
-      command: () => router.push("/support"),
-    },
-
-    {
-      label: "Settings",
-      icon: "pi pi-cog",
-      command: () => router.push("/settings"),
+      icon: "pi pi-wrench",
+      command : () => router.push("/support"),
     },
 
     {
@@ -189,7 +209,7 @@ export default function Navbar() {
   ];
 
   return (
-    <div className="card">
+    <div className="card w-full">
       <Menubar model={items} />
     </div>
   );
