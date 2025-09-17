@@ -290,7 +290,7 @@ export default function ChecklistOptions() {
   );
 }
 // ✅ Wrap the component with Suspense
-export default function ChecklistOptions() {
+export default function ChecklistOptionsPage() {
   return (
     <Suspense fallback={<div>Loading checklist options...</div>}>
       <ChecklistOptionsContent />
