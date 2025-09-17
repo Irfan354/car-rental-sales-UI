@@ -66,63 +66,6 @@ export default function Navbar() {
         },
       ],
     },
-    // vehicle
-    {
-      label: "Vehicle",
-      icon: "pi pi-car",
-      items: [
-        {
-          label : "All Vehicles",
-          icon : "pi pi-car",
-          command : () => router.push("/vehicle/all-vehicles")
-        },
-        {
-          label: "Vehicle Type",
-          icon: "pi pi-car",
-          command: () => router.push("/vehicle/vehicle-type"),
-        },
-        {
-          label: "Fuel Type",
-          icon: "pi pi-bolt",
-          command: () => router.push("/admin/vehicle/fuel-type"),
-        },
-        {
-          label: "Seater",
-          icon: "pi pi-users",
-          command: () => router.push("/vehicle/seater"),
-        },
-        {
-          label: "Transmission",
-          icon: "pi pi-sliders-h",
-          command: () => router.push("/vehicle/transmission"),
-        },
-        {
-          label : "Engine Capacity",
-          icon : "pi pi-cog",
-          command : () => router.push("/vehicle/enginecapacity"),
-        },
-        {
-          label : "Gears",
-          icon : "pi pi-cog",
-          command : () => router.push("/vehcile/gears"),
-        },
-        {
-          label : "Vehicle Status",
-          icon : " pi pi-check-circle",
-          command :()=> router.push("/vehicle/vehiclestatus"),
-        },
-        {
-          label : " Vehicle Features",
-          icon : "pi pi-star",
-          command : () => router.push("/vehicle/vehiclefeatures"),
-        },
-        {
-          label : " Vehicle Images",
-          icon : "pi pi-images",
-          command : () => router.push("/vehicle/vehicleimages"),
-        },
-      ],
-    },
     // Inventory
     {
       label: "Inventory",
