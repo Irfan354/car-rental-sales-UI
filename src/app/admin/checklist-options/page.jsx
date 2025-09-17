@@ -1,6 +1,6 @@
 "use client";
-import { useState, useEffect, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
+// removed useSearchParams import
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Sidebar } from "primereact/sidebar";
@@ -11,9 +11,22 @@ import { Dropdown } from "primereact/dropdown";
 export default function ChecklistOptions() {
   const [visible, setVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
-  const searchParams = useSearchParams();
-  const categoryId = searchParams.get('category');
-  
+
+  // read category from URL (safe in client)
+  const [categoryId, setCategoryId] = useState(() => {
+    if (typeof window === "undefined") return "";
+    return new URLSearchParams(window.location.search).get("category") || "";
+  });
+
+  // keep categoryId updated if user navigates back/forward
+  useEffect(() => {
+    const onPop = () => {
+      setCategoryId(new URLSearchParams(window.location.search).get("category") || "");
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+
   const [options, setOptions] = useState([
     { id: 1, categoryId: 1, name: "Body Damage", description: "Check for any body damage", isRequired: true, status: "Active" },
     { id: 2, categoryId: 1, name: "Paint Condition", description: "Check paint quality", isRequired: true, status: "Active" },
@@ -29,8 +42,9 @@ export default function ChecklistOptions() {
     { id: 4, name: "Document Verification" },
   ]);
 
+  // initialize form.categoryId using numeric value (if present)
   const [form, setForm] = useState({ 
-    categoryId: categoryId || "", 
+    categoryId: categoryId ? parseInt(categoryId, 10) : "", 
     name: "", 
     description: "", 
     isRequired: true, 
@@ -38,12 +52,20 @@ export default function ChecklistOptions() {
   });
   const [editingOption, setEditingOption] = useState(null);
 
+  // keep form.categoryId in sync when URL param changes
+  useEffect(() => {
+    setForm(prev => ({ ...prev, categoryId: categoryId ? parseInt(categoryId, 10) : "" }));
+  }, [categoryId]);
+
+  // parse categoryId for comparisons
+  const categoryIdNum = categoryId ? parseInt(categoryId, 10) : null;
+
   // Filter options by selected category
-  const filteredOptions = categoryId 
-    ? options.filter(option => option.categoryId === parseInt(categoryId))
+  const filteredOptions = categoryIdNum 
+    ? options.filter(option => option.categoryId === categoryIdNum)
     : options;
 
-  const currentCategory = categories.find(cat => cat.id === parseInt(categoryId));
+  const currentCategory = categories.find(cat => cat.id === categoryIdNum);
 
   // Counts
   const totalOptions = filteredOptions.length;
@@ -57,7 +79,7 @@ export default function ChecklistOptions() {
       return;
     }
     setOptions([...options, { id: options.length + 1, ...form }]);
-    setForm({ categoryId: categoryId || "", name: "", description: "", isRequired: true, status: "Active" });
+    setForm({ categoryId: categoryId ? parseInt(categoryId, 10) : "", name: "", description: "", isRequired: true, status: "Active" });
     setVisible(false);
   };
 
@@ -81,7 +103,7 @@ export default function ChecklistOptions() {
     
     setOptions(updatedOptions);
     setEditVisible(false);
-    setForm({ categoryId: categoryId || "", name: "", description: "", isRequired: true, status: "Active" });
+    setForm({ categoryId: categoryId ? parseInt(categoryId, 10) : "", name: "", description: "", isRequired: true, status: "Active" });
     setEditingOption(null);
   };
 
@@ -94,16 +116,6 @@ export default function ChecklistOptions() {
           className="p-button-text p-button-primary" 
           onClick={() => handleEditOption(rowData)}
           tooltip="Edit Option"
-        />
-        <Button 
-          icon="pi pi-trash" 
-          className="p-button-text p-button-danger" 
-          onClick={() => {
-            if (confirm('Are you sure you want to delete this option?')) {
-              setOptions(options.filter(opt => opt.id !== rowData.id));
-            }
-          }}
-          tooltip="Delete Option"
         />
       </div>
     );
@@ -287,13 +299,5 @@ export default function ChecklistOptions() {
         </div>
       </Sidebar>
     </div>
-  );
-}
-// ✅ Wrap the component with Suspense
-export default function ChecklistOptionsPage() {
-  return (
-    <Suspense fallback={<div>Loading checklist options...</div>}>
-      <ChecklistOptionsContent />
-    </Suspense>
   );
 }
