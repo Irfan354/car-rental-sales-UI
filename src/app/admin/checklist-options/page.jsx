@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
@@ -287,5 +287,13 @@ export default function ChecklistOptions() {
         </div>
       </Sidebar>
     </div>
+  );
+}
+// ✅ Wrap the component with Suspense
+export default function ChecklistOptions() {
+  return (
+    <Suspense fallback={<div>Loading checklist options...</div>}>
+      <ChecklistOptionsContent />
+    </Suspense>
   );
 }
