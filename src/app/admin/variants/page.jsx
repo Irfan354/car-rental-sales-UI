@@ -79,12 +79,6 @@ export default function Variants() {
           onClick={() => handleEditVariant(rowData)}
           tooltip="Edit Variant"
         />
-        <Button 
-          icon="pi pi-trash" 
-          className="p-button-text p-button-danger" 
-          onClick={() => {/* Add delete logic */}}
-          tooltip="Delete Variant"
-        />
       </div>
     );
   };

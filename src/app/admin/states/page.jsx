@@ -70,12 +70,6 @@ export default function States() {
           onClick={() => handleEditState(rowData)}
           tooltip="Edit State"
         />
-        <Button 
-          icon="pi pi-trash" 
-          className="p-button-text p-button-danger" 
-          onClick={() => {/* Add delete logic */}}
-          tooltip="Delete State"
-        />
       </div>
     );
   };

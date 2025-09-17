@@ -148,12 +148,12 @@ export default function Navbar() {
         {
           label: "Vehicle Bookings",
           icon: "pi pi-book",
-          command: () => router.push("/bookings/vehicle"),
+          command: () => router.push("/bookings/vehicle-bookings"),
         },
         {
           label: "Booking Logs",
           icon: "pi pi-file",
-          command: () => router.push("/bookings/logs"),
+          command: () => router.push("/bookings/booking-logs"),
         },
       ],
     },

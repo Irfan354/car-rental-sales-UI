@@ -71,12 +71,6 @@ export default function Models() {
           onClick={() => handleEditModel(rowData)}
           tooltip="Edit Model"
         />
-        <Button 
-          icon="pi pi-trash" 
-          className="p-button-text p-button-danger" 
-          onClick={() => {/* Add delete logic */}}
-          tooltip="Delete Model"
-        />
       </div>
     );
   };

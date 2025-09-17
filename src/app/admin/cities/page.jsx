@@ -95,16 +95,6 @@ export default function Cities() {
           onClick={() => handleEditCity(rowData)}
           tooltip="Edit City"
         />
-        <Button 
-          icon="pi pi-trash" 
-          className="p-button-text p-button-danger" 
-          onClick={() => {
-            if (confirm('Are you sure you want to delete this city?')) {
-              setCities(cities.filter(city => city.id !== rowData.id));
-            }
-          }}
-          tooltip="Delete City"
-        />
       </div>
     );
   };
